@@ -8,6 +8,8 @@ public class InvoiceEntry {
     private double amountExclTaxes;
     private double amountInclTaxes;
 
+    private double taxRate;
+
     public String getDescription() {
         return description;
     }
@@ -40,6 +42,13 @@ public class InvoiceEntry {
         this.amountInclTaxes = amountInclTaxes;
     }
 
+    public double getTaxRate() {
+        return taxRate;
+    }
+
+    public void setTaxRate(double taxRate) {
+        this.taxRate = taxRate;
+    }
 
     public static final class Builder {
         private InvoiceEntry invoiceEntry;
@@ -69,6 +78,11 @@ public class InvoiceEntry {
 
         public Builder amountInclTaxes(double amountInclTaxes) {
             invoiceEntry.setAmountInclTaxes(amountInclTaxes);
+            return this;
+        }
+
+        public Builder taxRate(double taxRate) {
+            invoiceEntry.setTaxRate(taxRate);
             return this;
         }
 

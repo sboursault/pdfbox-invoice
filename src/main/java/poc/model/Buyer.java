@@ -5,7 +5,6 @@ import java.util.List;
 public class Buyer {
     private String name;
     private List<String> address;
-    private String logo;
 
     public String getName() {
         return name;
@@ -21,14 +20,6 @@ public class Buyer {
 
     public void setAddress(List<String> address) {
         this.address = address;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
     }
 
     public static final class Builder {
@@ -53,11 +44,6 @@ public class Buyer {
 
         public Builder address(List<String> address) {
             buyer.setAddress(address);
-            return this;
-        }
-
-        public Builder logo(String logo) {
-            buyer.setLogo(logo);
             return this;
         }
 

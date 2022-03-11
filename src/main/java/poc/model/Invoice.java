@@ -2,9 +2,8 @@ package poc.model;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 /**
  * Mandatory information on a french invoice: https://entreprendre.service-public.fr/vosdroits/F31808
@@ -13,8 +12,7 @@ public class Invoice {
 
     private String invoiceNumber;
     private LocalDate issueDate;
-    private LocalDate periodStartDate;
-    private LocalDate periodEndDate;
+    private String status;
 
     private Buyer buyer;
     private Emitter emitter;
@@ -37,20 +35,12 @@ public class Invoice {
         this.issueDate = issueDate;
     }
 
-    public LocalDate getPeriodStartDate() {
-        return periodStartDate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPeriodStartDate(LocalDate periodStartDate) {
-        this.periodStartDate = periodStartDate;
-    }
-
-    public LocalDate getPeriodEndDate() {
-        return periodEndDate;
-    }
-
-    public void setPeriodEndDate(LocalDate periodEndDate) {
-        this.periodEndDate = periodEndDate;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Buyer getBuyer() {
@@ -77,6 +67,14 @@ public class Invoice {
         this.entries = entries;
     }
 
+    public double getTotalInclTaxes() {
+        return entries.stream().mapToDouble(InvoiceEntry::getAmountInclTaxes).sum();
+    }
+
+    public double getTotalExclTaxes() {
+        return entries.stream().mapToDouble(InvoiceEntry::getAmountExclTaxes).sum();
+    }
+
 
     public static final class Builder {
         private Invoice invoice;
@@ -99,13 +97,8 @@ public class Invoice {
             return this;
         }
 
-        public Builder periodStartDate(LocalDate periodStartDate) {
-            invoice.setPeriodStartDate(periodStartDate);
-            return this;
-        }
-
-        public Builder periodEndDate(LocalDate periodEndDate) {
-            invoice.setPeriodEndDate(periodEndDate);
+        public Builder status(String status) {
+            invoice.setStatus(status);
             return this;
         }
 
@@ -139,5 +132,6 @@ public class Invoice {
         public Invoice build() {
             return invoice;
         }
+
     }
 }

@@ -6,11 +6,20 @@ import java.util.List;
 
 public class Emitter {
 
-    String name;
-    List<Pair> legalIds;  // siren, tva number
-    List<String> address;
-    String legalForm;
-    String shareCapital;
+    private String logo;
+    private String name;
+    private List<Pair<String, String>> legalIds;  // siren, tva number,...
+    private List<String> address;
+    private String legalForm;
+    private String shareCapital;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public String getName() {
         return name;
@@ -20,11 +29,11 @@ public class Emitter {
         this.name = name;
     }
 
-    public List<Pair> getLegalIds() {
+    public List<Pair<String, String>> getLegalIds() {
         return legalIds;
     }
 
-    public void setLegalIds(List<Pair> legalIds) {
+    public void setLegalIds(List<Pair<String, String>> legalIds) {
         this.legalIds = legalIds;
     }
 
@@ -64,12 +73,17 @@ public class Emitter {
             return new Builder();
         }
 
+        public Builder logo(String logo) {
+            emitter.setLogo(logo);
+            return this;
+        }
+
         public Builder name(String name) {
             emitter.setName(name);
             return this;
         }
 
-        public Builder legalIds(List<Pair> legalIds) {
+        public Builder legalIds(List<Pair<String, String>> legalIds) {
             emitter.setLegalIds(legalIds);
             return this;
         }
@@ -100,5 +114,6 @@ public class Emitter {
         public Emitter build() {
             return emitter;
         }
+
     }
 }
