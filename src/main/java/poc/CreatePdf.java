@@ -2,7 +2,6 @@ package poc;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -18,32 +17,35 @@ public class CreatePdf {
     public static void main(String args[]) throws IOException {
 
         new InvoiceToPdfService().createPdf(anInvoice()
-                .invoiceNumber("INV-4987")
+                .invoiceNumber("4987895")
                 .issueDate(LocalDate.now())
+                .status("PAYÉE")
                 .buyer(
                         aBuyer()
                                 .name("Tom Jedusor")
-                                .address("44 Queen Charlotte St", "Edinburgh", "Midlothian EH6 7EX")
-                                .logo("your_brand.png"))
+                                .address("44 Queen Charlotte St", "Edinburgh", "Midlothian EH6 7EX"))
                 .emitter(anEmitter()
-                        .name("Big company")
+                        .name("My company")
                         .legalIds(
-                                Pair.of("Siren", "123456798"),
-                                Pair.of("Numéro TVA", "FR51123456798"))
-                        .address("41 Rue de Richelieu", "75001 Paris")
-                        .legalForm("Société européenne")
-                        .shareCapital("25 €"))
+                                Pair.of("Siren", "123456789"),
+                                Pair.of("TVA intracommunautaire", "123456789"))
+                        .address("78 rue de la Liberté", "59000 Lille")
+                        .legalForm("SASU")
+                        .shareCapital("50 000 €")
+                        .logo("your_brand.png"))
                 .entries(
                         anInvoiceEntry()
-                                .description("1 abonnement BASIC")
+                                .description("Basic subscription\n(from 25/02/2022 to 31/03/2022)")
                                 .quantity(1)
-                                .amountExclTaxes(1160)
-                                .amountInclTaxes(200),
+                                .amountExclTaxes(160)
+                                .amountInclTaxes(200)
+                                .taxRate(.20)
+                        /*,
                         anInvoiceEntry()
                                 .description("1 abonnement BASIC")
                                 .quantity(1)
                                 .amountExclTaxes(260)
-                                .amountInclTaxes(300)
+                                .amountInclTaxes(300)*/
                 )
                 .build());
 
